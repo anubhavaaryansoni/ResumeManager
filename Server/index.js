@@ -38,7 +38,7 @@ async function main() {
   console.log("Mongo connection open");
 }
 
-const secret = process.env.SECRET_KEY || "fuckOffIdiots";
+const secret = process.env.SECRET_KEY || "secretkey";
 
 const store = new MongoDBStore({
   mongoUrl: db_url,
