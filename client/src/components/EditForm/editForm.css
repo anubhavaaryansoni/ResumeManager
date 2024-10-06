@@ -1,51 +1,188 @@
-.cont {
-    margin-top: 70px;
-    border-radius: 12px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+/* Container styles */
+form {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Form layout */
+.Form.Field {
+  margin-bottom: 1.75rem;
+}
+
+.Form.Label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+/* Input styles with readonly/disabled states */
+.Form.Input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+}
+
+.Form.Input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background-color: #ffffff;
+}
+
+.Form.Input:hover:not(:disabled) {
+  border-color: #9ca3af;
+}
+
+.Form.Input:disabled,
+.Form.Input[readonly] {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Date input specific styles */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 0.5rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Number input styles */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Button styles */
+.Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #6366f1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.Button:hover {
+  background-color: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.Button:active {
+  transform: translateY(0);
+}
+
+.Button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+}
+
+/* Form Control spacing */
+.Form.Control {
+  position: relative;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+/* Validation states */
+.Form.Input.is-success {
+  border-color: #10b981;
+}
+
+.Form.Input.is-danger {
+  border-color: #ef4444;
+}
+
+/* Helper text styles */
+.helper-text {
+  font-size: 0.875rem;
+  margin-top: 0.375rem;
+}
+
+.helper-text.is-success {
+  color: #10b981;
+}
+
+.helper-text.is-danger {
+  color: #ef4444;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  form {
+    margin: 1rem;
+    padding: 1.5rem;
   }
   
-  .input {
-    margin: 2rem auto;
-    padding: 1rem;
-    width: 90%;
-    max-width: 40rem;
+  .Form.Input {
+    padding: 0.625rem 0.875rem;
   }
   
-  .input label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  .input input {
-    font: inherit;
-    display: block;
+  .Button {
     width: 100%;
-    border: 1px solid #ccc;
-    padding: 0.15rem;
-    margin-bottom: 0.5rem;
   }
-  
-  .input input:focus {
-    outline: none;
-    border-color: #4f005f;
+}
+
+/* Loading state styles */
+.Form.Input.is-loading {
+  position: relative;
+  color: transparent;
+}
+
+.Form.Input.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #e5e7eb;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .button {
-    font: inherit;
-    border: 1px solid #4f005f;
-    background: #4f005f;
-    color: white;
-    padding: 0.25rem 1rem;
-    cursor: pointer;
-  }
-  
-  .button:hover,
-  .button:active {
-    background: #741188;
-    border-color: #741188;
-  }
-  
-  .button:focus {
-    outline: none;
-  }
+}

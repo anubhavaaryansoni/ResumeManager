@@ -8,7 +8,12 @@ import Navbar from "../Navbar";
 
 const Upload = () => {
   const [file, setFile] = useState();
+//   if(!ctx.isLoggedIn && localStorage.getItem('isLoggedIn')) {
+//     console.log("here", !ctx.isLoggedIn);
+    
+// }else{
 
+// }
   const onSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();

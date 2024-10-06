@@ -1,8 +1,8 @@
+import "./editForm.css"
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bulma-components"
 import Navbar from "../Navbar";;
-// import "./editForm.css";
 
 const EditForm = () => {
   const [username, setUsername] = useState("");

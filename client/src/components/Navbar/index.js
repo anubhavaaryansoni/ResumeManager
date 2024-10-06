@@ -66,14 +66,14 @@ function Nav() {
             width="40"
           />
         </Navbar.Item>
-        <Navbar.Burger />.
+        <Navbar.Burger />
       </Navbar.Brand>
       <Navbar.Menu>
         <Navbar.Container>
-          <Navbar.Item href="/">Homepage</Navbar.Item>
-          <Navbar.Item href="/editinfo">Change Your Info</Navbar.Item>
-          <Navbar.Item href="/upload">Upload Resume</Navbar.Item>
-          <Navbar.Item href="/allinterns">Check Internships</Navbar.Item>
+          {ctx.isLoggedIn &&<Navbar.Item href="/">Homepage</Navbar.Item>}
+          {ctx.isLoggedIn && <Navbar.Item href="/editinfo">Change Your Info</Navbar.Item>}
+          {ctx.isLoggedIn && <Navbar.Item href="/upload">Upload Resume</Navbar.Item>}
+          {ctx.isLoggedIn && <Navbar.Item href="/allinterns">Check Internships</Navbar.Item>}
         </Navbar.Container>
         <Navbar.Container align="end" className="is-vcentered mt-auto mb-auto">
           {!ctx.isLoggedIn ? (
