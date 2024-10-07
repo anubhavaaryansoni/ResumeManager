@@ -3,12 +3,13 @@ import axios from "axios";
 import Navbar from "../Navbar";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Button } from "react-bulma-components";
+import "./internPage.css";
 
 const InternPage = () => {
   const { internId } = useParams();
   const [Data, setData] = useState({ companyID: {} });
   const [user, setUser] = useState({});
+
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/intern/${internId}`, {
@@ -35,8 +36,6 @@ const InternPage = () => {
   }, [internId]);
 
   const obj = { msg: "application" };
-
-  console.log(user);
 
   const applyForIntern = () => {
     axios
@@ -73,64 +72,68 @@ const InternPage = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <Card className="mt-4 ml-2 mr-2">
-        <Card.Header>
-          <Card.Header.Title className="is-justify-content-space-around">
-            {Data.companyID.companyName}
-          </Card.Header.Title>
-        </Card.Header>
-        <Card.Content>
-          <Card className="ml-1">
-            <h1 className="has-text-weight-bold">Description:</h1>
-            <p>{Data.description}</p>
-          </Card>
-          <Card>
-            <Card.Content>
-              <h1>
-                <span className="has-text-weight-bold">Start Date:</span>{" "}
-                {Data.start_date}
-              </h1>
-              <h1>
-                <span className="has-text-weight-bold">Stipend:</span> Rs
-                {Data.stipend}
-              </h1>
-              <h1>
-                <span className="has-text-weight-bold">Compensation:</span>{" "}
-                {Data.compensation ? Data.compensation : "None"}
-              </h1>
-              <h1>
-                <span className="has-text-weight-bold">
-                  Application Deadline:
-                </span>{" "}
-                {Data.application_deadline}
-              </h1>
-            </Card.Content>
-            <Card.Content>
-              <h1 className="has-text-weight-bold">Supervision(If Needed):</h1>
-              <p>{Data.supervision_mentorship}</p>
-              <h1 className="has-text-weight-bold">Eligibility for FE:</h1>
-              <p>{Data.eligiblity_for_FE}</p>
-            </Card.Content>
-          </Card>
-        </Card.Content>
-        <Card.Footer>
-          {!(user.designation === "comp_representative") ? (
-            <Card.Footer.Item>
-              <Button onClick={applyForIntern}>Apply</Button>
-            </Card.Footer.Item>
-          ) : (
-            <React.Fragment></React.Fragment>
+      <div className="intern-card">
+        <div className="card-header">
+          <h2 className="card-header-title">{Data.companyID.companyName}</h2>
+        </div>
+        
+        <div className="card-content">
+          <div className="info-card">
+            <h3 className="section-title">Description</h3>
+            <p className="info-text">{Data.description}</p>
+          </div>
+          
+          <div className="info-card">
+            <div className="info-row">
+              <span className="info-label">Start Date:</span>
+              <span className="info-value">{Data.start_date}</span>
+            </div>
+            
+            <div className="info-row">
+              <span className="info-label">Stipend:</span>
+              <span className="info-value">Rs {Data.stipend}</span>
+            </div>
+            
+            <div className="info-row">
+              <span className="info-label">Compensation:</span>
+              <span className="info-value">{Data.compensation || "None"}</span>
+            </div>
+            
+            <div className="info-row">
+              <span className="info-label">Application Deadline:</span>
+              <span className="info-value">{Data.application_deadline}</span>
+            </div>
+          </div>
+          
+          <div className="info-card">
+            <div className="info-section">
+              <h3 className="section-title">Supervision (If Needed)</h3>
+              <p className="info-text">{Data.supervision_mentorship}</p>
+            </div>
+            
+            <div className="info-section">
+              <h3 className="section-title">Eligibility for FE</h3>
+              <p className="info-text">{Data.eligiblity_for_FE}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="card-footer">
+          {!(user.designation === "comp_representative") && (
+            <button className="button" onClick={applyForIntern}>
+              Apply
+            </button>
           )}
-          {user.designation === "comp_representative" ? (
-            <Card.Footer.Item>
-              <Button onClick={getAllInterns}>Get All applications</Button>
-            </Card.Footer.Item>
-          ) : (
-            <React.Fragment></React.Fragment>
+          
+          {user.designation === "comp_representative" && (
+            <button className="button" onClick={getAllInterns}>
+              Get All Applications
+            </button>
           )}
-        </Card.Footer>
-      </Card>
+        </div>
+      </div>
     </React.Fragment>
   );
 };
+
 export default InternPage;

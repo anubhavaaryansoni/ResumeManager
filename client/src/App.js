@@ -11,7 +11,7 @@ import Home from './components/Home';
 import EditForm from './components/EditForm';
 import UserPage from './components/UserPage';
 import AllInterns from './components/allInterns'
-
+import CompanyRegistration from './components/CompanyReg/CompanyReg';
 // import 'bootstrap/dist/css/bootstrap.min.css' ;
 import 'bulma/css/bulma.min.css';
 import InternPage from './components/internpage';
@@ -25,6 +25,7 @@ function App(props) {
     {path: "/editinfo", element: <EditForm /> },
     {path: "/userpage", element: <UserPage/>},
     {path: "/allinterns", element: <AllInterns />},
+    {path: "/companyRegister", element: <CompanyRegistration />},
     {path: "/intern/:internId", element: <InternPage />}
   ]);
 

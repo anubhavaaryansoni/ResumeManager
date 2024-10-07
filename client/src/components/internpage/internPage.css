@@ -1,0 +1,128 @@
+.intern-card {
+    margin: 2rem auto;
+    max-width: 1000px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+  }
+  
+  .card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .card-header-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  .info-card {
+    margin: 1rem 0;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    transition: all 0.2s ease;
+  }
+  
+  .info-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.75rem;
+  }
+  
+  .info-text {
+    color: #4b5563;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  
+  .info-label {
+    font-weight: 600;
+    color: #374151;
+    margin-right: 0.5rem;
+  }
+  
+  .info-value {
+    color: #4b5563;
+  }
+  
+  .card-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    border-radius: 0 0 12px 12px;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #6366f1;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .button:hover {
+    background-color: #4f46e5;
+    transform: translateY(-1px);
+  }
+  
+  .button:active {
+    transform: translateY(0);
+  }
+  
+  .button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .intern-card {
+      margin: 1rem;
+      padding: 1rem;
+    }
+    
+    .card-header {
+      padding: 1rem;
+    }
+    
+    .card-content {
+      padding: 1rem;
+    }
+    
+    .info-card {
+      padding: 1rem;
+    }
+    
+    .card-footer {
+      padding: 1rem;
+      flex-direction: column;
+    }
+    
+    .button {
+      width: 100%;
+    }
+  }

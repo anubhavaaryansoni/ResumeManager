@@ -1,99 +1,102 @@
-import axios from "axios";
 import React, { useState, useContext } from "react";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../Navbar";
 import AuthContext from "../store/auth-context";
-import { Form, Button, Icon } from "react-bulma-components";
-
 import "./login.css";
 
-const Login = (props) => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-
+const Login = () => {
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
+  
+  const [formData, setFormData] = useState({
+    username: "",
+    password: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const obj = { username: username, password: password };
-
-    axios
-      .post("http://localhost:4000/api/login", obj, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          authCtx.onLogin();
-          alert("Logged in!!!");
-          window.location.href = "/";
-        }
-      })
-      .catch((e) => {
-        alert("error");
-        console.log(e);
-      });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/login",
+        formData,
+        { withCredentials: true }
+      );
+      
+      if (response.status === 200) {
+        authCtx.onLogin();
+        alert("Logged in successfully!");
+        navigate("/", { replace: true });
+      }
+    } catch (error) {
+      alert("Login failed. Please check your credentials.");
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
-      <div className="cont">
-        <form onSubmit={onSubmit} className="ml-2 mt-2 mr-2">
-          <Form.Field>
-            <Form.Label>Username:</Form.Label>
-            <Form.Control className="mt-2">
-              <Form.Input
-                color="success"
-                value={username}
-                onChange={(e) => {
-                  return setUsername(e.target.value);
-                }}
+      <div className="login-container">
+        <div className="login-card">
+          <h1 className="login-title">Login</h1>
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="form-group">
+              <label htmlFor="username" className="form-label">
+                Username
+              </label>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                className="form-input"
+                value={formData.username}
+                onChange={handleChange}
+                disabled={isSubmitting}
+                required
               />
-              {/* <Icon align="left" size="small">
-                <i className="fas fa-user" />
-              </Icon>
-              <Icon align="right" size="small">
-                <i className="fas fa-check" />
-              </Icon> */}
-            </Form.Control>
-            {/* <Form.Help color="success">This username is available</Form.Help> */}
-          </Form.Field>
+            </div>
 
-          <Form.Field >
-            <Form.Label>Password:</Form.Label>
-            <Form.Control className="mt-2">
-              <Form.Input
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
                 type="password"
-                color="primary"
-                value={password}
-                onChange={(e) => {
-                  return setPassword(e.target.value);
-                }}
+                className="form-input"
+                value={formData.password}
+                onChange={handleChange}
+                disabled={isSubmitting}
+                required
               />
-              {/* <Icon align="left" size="small">
-                <i className="fas fa-envelope" />
-              </Icon>
-              <Icon align="right" size="small">
-                <i className="fas fa-exclamation-triangle" />
-              </Icon> */}
-            </Form.Control>
-          </Form.Field>
+            </div>
 
-          {/* <Form.Label>Username:</Form.Label>
-          <Form.Input
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Form.Label>Password:</Form.Label>
-          <Form.Input
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-          /> */}
-          <Form.Field>
-          <Button backgroundColor="link" type="submit" value="submit" className="mb-2">
-            Submit
-          </Button>
-          </Form.Field>
-        </form>
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Logging in..." : "Login"}
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

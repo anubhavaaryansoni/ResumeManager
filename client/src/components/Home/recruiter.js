@@ -13,6 +13,7 @@ const Recruiterview = () => {
   const [hiringInformation, setHiringInformation] = useState();
   const [eligibility, setEligibility] = useState();
 
+
   const CreateIntern = (e) => {
     e.preventDefault();
     const obj = {
@@ -33,7 +34,7 @@ const Recruiterview = () => {
     axios
       .post("http://localhost:4000/api/intern", obj, { withCredentials: true })
       .then((res) => {
-        alert("yup");
+        alert("posted");
       })
       .catch((e) => {
         console.log(e);
@@ -43,6 +44,8 @@ const Recruiterview = () => {
   return (
     <div className="cont">
       <form onSubmit={CreateIntern} className="ml-2 mr-2 mt-3 mb-3">
+      <h1 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>Post Intern</h1>
+
         <Form.Field>
           <Form.Label htmlFor="companyName">Company Name</Form.Label>
           <Form.Control className="mt-2">

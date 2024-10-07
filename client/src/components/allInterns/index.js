@@ -1,42 +1,61 @@
 import axios from "axios";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
-
-import { Card } from "react-bulma-components";
+import { Link } from "react-router-dom";
+import "./allInterns.css";
 
 const Allinterns = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/intern", { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
+        setIsLoading(false);
       })
       .catch((e) => {
         console.log(e);
+        setIsLoading(false);
       });
-  }, [setData]);
-  const address = "http://localhost:3000/intern/";
+  }, []);
+
+  if (isLoading) {
+    return (
+      <React.Fragment>
+        <Navbar />
+        <div className="interns-container">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="loading-skeleton" />
+          ))}
+        </div>
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
       <Navbar />
-      <div className="mt-3">
-        {data.map(function (val) {
-          return (
-            <Card className="ml-3 mb-3">
-              <Card.Header className="is-justify-content-space-around">
-                <a href={address + val._id}>{val.companyID.companyName}</a>
-              </Card.Header>
-              <Card.Content>
-                <p>{val.description}</p>
-              </Card.Content>
-            </Card>
-          );
-        })}
+      <div className="interns-container">
+        {data.map((internship) => (
+          <article key={internship._id} className="intern-card">
+            <header className="intern-card-header">
+              <Link 
+                to={`/intern/${internship._id}`} 
+                className="company-link"
+              >
+                {internship.companyID.companyName}
+              </Link>
+            </header>
+            <div className="intern-card-content">
+              <p className="description">{internship.description}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </React.Fragment>
   );
 };
+
 export default Allinterns;

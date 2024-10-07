@@ -1,0 +1,104 @@
+.cont {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+  }
+  
+  form {
+    display: grid;
+    gap: 1.5rem;
+  }
+  
+  .label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: #f9fafb;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    background-color: #ffffff;
+  }
+  
+  .input:hover {
+    border-color: #9ca3af;
+  }
+  
+  .button {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #6366f1;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .button:hover {
+    background-color: #4f46e5;
+    transform: translateY(-1px);
+  }
+  
+  .button:active {
+    transform: translateY(0);
+  }
+  
+  .button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+  }
+  
+  .Form.Field {
+    margin-bottom: 1.5rem;
+  }
+  
+  .Form.Control {
+    position: relative;
+  }
+  
+  @media (max-width: 768px) {
+    .cont {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+    
+    .input {
+      padding: 0.625rem 0.875rem;
+    }
+  }
+  
+  .input.is-danger {
+    border-color: #ef4444;
+  }
+  
+  .input.is-danger:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  }
+  
+  .input.is-success {
+    border-color: #10b981;
+  }
+  
+  .input.is-success:focus {
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }

@@ -9,8 +9,20 @@ import AuthContext from "../store/auth-context";
 function Nav() {
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [designation, setDesignation] = useState("");
 
   const ctx = useContext(AuthContext);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/user", { withCredentials: true })
+      .then((res) => {
+        setDesignation(res.data.designation);
+      })
+      .catch((err) => {
+        console.error(err);
+        // window.location.href = "/login";
+      });
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 700px)");
@@ -70,10 +82,19 @@ function Nav() {
       </Navbar.Brand>
       <Navbar.Menu>
         <Navbar.Container>
-          {ctx.isLoggedIn &&<Navbar.Item href="/">Homepage</Navbar.Item>}
-          {ctx.isLoggedIn && <Navbar.Item href="/editinfo">Change Your Info</Navbar.Item>}
-          {ctx.isLoggedIn && <Navbar.Item href="/upload">Upload Resume</Navbar.Item>}
-          {ctx.isLoggedIn && <Navbar.Item href="/allinterns">Check Internships</Navbar.Item>}
+          {ctx.isLoggedIn && <Navbar.Item href="/">Homepage</Navbar.Item>}
+          {ctx.isLoggedIn && (
+            <Navbar.Item href="/editinfo">Change Your Info</Navbar.Item>
+          )}
+          {ctx.isLoggedIn && !designation==="comp_representative" &&(
+            <Navbar.Item href="/upload">Upload Resume</Navbar.Item>
+          )}
+          {ctx.isLoggedIn && (
+            <Navbar.Item href="/allinterns">Check Internships</Navbar.Item>
+          )}
+          {ctx.isLoggedIn && designation === "comp_representative"|| designation === "admin" &&(
+            <Navbar.Item href="/companyRegister">Register Company</Navbar.Item>
+          )}
         </Navbar.Container>
         <Navbar.Container align="end" className="is-vcentered mt-auto mb-auto">
           {!ctx.isLoggedIn ? (
